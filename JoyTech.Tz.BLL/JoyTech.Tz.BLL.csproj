@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\JoyTech.Tz.BLL.Interfaces\JoyTech.Tz.BLL.Interfaces.csproj" />
+      <ProjectReference Include="..\JoyTech.Tz.DAL.Interfaces\JoyTech.Tz.DAL.Interfaces.csproj" />
     </ItemGroup>
 
 </Project>

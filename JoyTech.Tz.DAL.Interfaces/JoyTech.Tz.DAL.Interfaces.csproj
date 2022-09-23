@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\JoyTech.Tz.Entities\JoyTech.Tz.Entities.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -1,5 +1,5 @@
 ﻿namespace JoyTech.Tz.BLL.Interfaces;
 
-public class IUserLogic
+public interface IUserLogic
 {
 }
