@@ -29,7 +29,8 @@ public class OrderDao : IOrderDao
     public async Task<List<Order>> GetAllOrders()
     {
         await using var context = new ApplicationContext(_config);
-        var orders = await context.Orders.ToListAsync();
+        var orders = await context.Orders.Include(o => o.OrderProducts)
+            .ToListAsync();
         return orders;
     }
 

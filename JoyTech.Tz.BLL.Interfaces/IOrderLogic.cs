@@ -9,4 +9,6 @@ public interface IOrderLogic
     bool UpdateOrder(Order order);
     bool DeleteOrder(int id);
     Order? GetOrderById(int id);
+    List<Product> GetProductsInOrder(int orderId);
+    
 }

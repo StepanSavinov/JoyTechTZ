@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace JoyTech.Tz.Entities;
 
 [Table("Orders")]
 [Index("Id", IsUnique=true, Name = "Id_Index")]
-public class Order : IEquatable<Order>
+public sealed class Order : IEquatable<Order>
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -17,17 +18,24 @@ public class Order : IEquatable<Order>
     public int UserId { get; set; }
     
     [ForeignKey("UserId")]
+    [JsonIgnore]
     public User User { get; set; }
-    
+
+    public List<Product> Products { get; set; }
+    public List<OrderProducts> OrderProducts { get; set; } = new List<OrderProducts>();
+
     [Column("TotalCost")]
     public int TotalCost { get; set; }
     
     [Column("Quantity")]
     public int Quantity { get; set; }
 
-    // public Order(User user)
+    // public Order(List<Product> products, int userId)
     // {
-    //     UserId = user.Id;
+    //     UserId = userId;
+    //     Products = products;
+    //     TotalCost = Products.Sum(p => p.Price);
+    //     Quantity = Products.Count;
     // }
 
     public bool Equals(Order? other)
