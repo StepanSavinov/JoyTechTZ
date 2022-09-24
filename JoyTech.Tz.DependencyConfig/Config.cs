@@ -18,8 +18,10 @@ public static class Config
         services.AddSingleton<IConfiguration>(builder);
         services.AddScoped<IUserDao, UserDao>();
         services.AddScoped<IOrderDao, OrderDao>();
+        services.AddScoped<IProductDao, ProductDao>();
         services.AddScoped<IUserLogic, UserLogic>();
         services.AddScoped<IOrderLogic, OrderLogic>();
+        services.AddScoped<IProductLogic, ProductLogic>();
         services.AddSingleton(cfg => new SqlConfig(builder));
         
         return services.BuildServiceProvider();

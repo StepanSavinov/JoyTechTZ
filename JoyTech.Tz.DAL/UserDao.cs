@@ -12,9 +12,10 @@ public class UserDao : IUserDao
     {
         _config = config;
     }
-    public Task<User> Auth(string username, string password)
+    public async Task<User?> Auth(string username, string password)
     {
-        throw new NotImplementedException();
+        await using var context = new ApplicationContext(_config);
+        return await context.Users.FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
     }
 
     public async Task<bool> Register(User user)
@@ -35,14 +36,14 @@ public class UserDao : IUserDao
     public async Task<List<User>> GetAllUsers()
     {
         await using var context = new ApplicationContext(_config);
-        var users = await context.Users.ToListAsync();
+        var users = await context.Users.Include(o => o.Orders).ToListAsync();
         return users;
     }
 
     public async Task<bool> UpdateUser(User user)
     {
         await using var context = new ApplicationContext(_config);
-        var userForEditing = await GetUserById(user.Id); // context.Users.FirstOrDefaultAsync(o => o.Id == user.Id).Result;
+        var userForEditing = await GetUserById(user.Id);
 
         if (userForEditing != null)
         {
@@ -67,7 +68,7 @@ public class UserDao : IUserDao
     public async Task<bool> DeleteUser(int id)
     {
         await using var context = new ApplicationContext(_config);
-        var userForDeletion = await GetUserById(id); //context.Users.FirstOrDefaultAsync(u => u.Id == id).Result;
+        var userForDeletion = await GetUserById(id);
 
         if (userForDeletion != null)
         {
@@ -90,10 +91,5 @@ public class UserDao : IUserDao
         await using var context = new ApplicationContext(_config);
         var user = await context.Users.FirstOrDefaultAsync(u => u.Id == id);
         return user;
-    }
-
-    public Task<List<Order>> GetUserOrders(User user)
-    {
-        throw new NotImplementedException();
     }
 }

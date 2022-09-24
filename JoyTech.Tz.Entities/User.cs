@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +6,7 @@ namespace JoyTech.Tz.Entities;
 
 [Table("Users")]
 [Index("Id", IsUnique=true, Name = "Id_Index")]
-public class User : IEquatable<User>
+public sealed class User : IEquatable<User>
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -17,7 +16,7 @@ public class User : IEquatable<User>
     public string Username { get; set; }
     [Column("Password")]
     public string Password { get; set; }
-    public List<Order> Orders { get; set; }
+    public List<Order>? Orders { get; set; }
     [Column("Role")]
     public string Role { get; set; }
 

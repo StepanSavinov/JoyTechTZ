@@ -13,9 +13,9 @@ public class UserLogic : IUserLogic
         _userDao = userDao;
     }
 
-    public User Auth(string username, string password)
+    public User? Auth(string username, string password)
     {
-        throw new NotImplementedException();
+        return _userDao.Auth(username, password).Result;
     }
 
     public bool Register(User user)
@@ -47,5 +47,26 @@ public class UserLogic : IUserLogic
     public User? GetUserById(int id)
     {
         return _userDao.GetUserById(id).Result;
+    }
+
+    public List<Order>? GetUserOrders(int id)
+    {
+        return GetUserById(id)?.Orders;
+    }
+
+    public string GetUserInfo(int id)
+    {
+        var user = GetUserById(id);
+        if (user == null)
+        {
+            throw new NullReferenceException();
+        }
+
+        if (user.Orders != null)
+        {
+            return $"{user.Username}, orders: {user.Orders.Count}, sum: {user.Orders.Sum(o => o.TotalCost)}";
+        }
+
+        return $"This user hasn't order anything yet.";
     }
 }
