@@ -4,8 +4,9 @@ namespace JoyTech.Tz.DAL.Interfaces;
 
 public interface IOrderDao
 {
-    Task CreateOrder(User user);
+    Task<bool> CreateOrder(Order order);
     Task<List<Order>> GetAllOrders();
-    Task UpdateOrder(Order order);
-    Task DeleteOrder(Order order);
+    Task<bool> UpdateOrder(Order order);
+    Task<bool> DeleteOrder(int id);
+    Task<Order?> GetOrderById(int id);
 }

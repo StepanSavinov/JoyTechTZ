@@ -4,8 +4,9 @@ namespace JoyTech.Tz.BLL.Interfaces;
 
 public interface IOrderLogic
 {
-    Task CreateOrder(User user);
-    Task<List<Order>> GetAllOrders();
-    Task UpdateOrder(Order order);
-    Task DeleteOrder(Order order);
+    bool CreateOrder(Order order);
+    List<Order> GetAllOrders();
+    bool UpdateOrder(Order order);
+    bool DeleteOrder(int id);
+    Order? GetOrderById(int id);
 }

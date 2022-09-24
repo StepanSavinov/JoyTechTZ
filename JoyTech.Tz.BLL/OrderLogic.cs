@@ -6,29 +6,40 @@ namespace JoyTech.Tz.BLL;
 
 public class OrderLogic : IOrderLogic
 {
-    private IOrderDao _orderDao;
+    private readonly IOrderDao _orderDao;
 
     public OrderLogic(IOrderDao orderDao)
     {
         _orderDao = orderDao;
     }
-    public async Task CreateOrder(User user)
+    public bool CreateOrder(Order order)
     {
-        await _orderDao.CreateOrder(user);
+        return _orderDao.CreateOrder(order).Result;
     }
 
-    public async Task<List<Order>> GetAllOrders()
+    public List<Order> GetAllOrders()
     {
-        return await _orderDao.GetAllOrders();
+        return _orderDao.GetAllOrders().Result;
     }
 
-    public async Task UpdateOrder(Order order)
+    public bool UpdateOrder(Order order)
     {
-        await _orderDao.UpdateOrder(order);
+        return _orderDao.UpdateOrder(order).Result;
     }
 
-    public async Task DeleteOrder(Order order)
+    public bool DeleteOrder(int id)
     {
-        await _orderDao.DeleteOrder(order);
+        var order = GetOrderById(id);
+        if (order is null)
+        {
+            return false;
+        }
+        
+        return _orderDao.DeleteOrder(id).Result;
+    }
+
+    public Order? GetOrderById(int id)
+    {
+        return _orderDao.GetOrderById(id).Result;
     }
 }

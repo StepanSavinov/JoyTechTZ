@@ -11,4 +11,10 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\JoyTech.Tz.BLL.Interfaces\JoyTech.Tz.BLL.Interfaces.csproj" />
+      <ProjectReference Include="..\JoyTech.Tz.DependencyConfig\JoyTech.Tz.DependencyConfig.csproj" />
+      <ProjectReference Include="..\JoyTech.Tz.Entities\JoyTech.Tz.Entities.csproj" />
+    </ItemGroup>
+
 </Project>

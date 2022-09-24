@@ -19,4 +19,21 @@ public sealed class ApplicationContext : DbContext
     {
         optionsBuilder.UseSqlServer(_connectionString);
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Order>(entity =>
+        {
+            //entity.ToTable("Orders");
+            entity.HasOne(o => o.User)
+                .WithMany(u => u.Orders);
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasMany(u => u.Orders)
+                .WithOne(o => o.User);
+        });
+
+    }
 }
