@@ -15,7 +15,7 @@ public class OrderDao : IOrderDao
     {
         await using var context = new ApplicationContext(_config);
         await context.Orders.AddAsync(order);
-        
+
         context.ChangeTracker.DetectChanges();
         if (context.Entry(order).State == EntityState.Added)
         {

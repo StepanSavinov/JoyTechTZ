@@ -6,7 +6,6 @@ namespace JoyTech.Tz.DAL;
 public sealed class ApplicationContext : DbContext
 {
     private readonly string? _connectionString;
-
     public DbSet<Order> Orders { get; set; }
     public DbSet<User> Users { get; set; }
 
@@ -26,7 +25,8 @@ public sealed class ApplicationContext : DbContext
         {
             //entity.ToTable("Orders");
             entity.HasOne(o => o.User)
-                .WithMany(u => u.Orders);
+                .WithMany(u => u.Orders)
+                .HasForeignKey(o => o.UserId);
         });
 
         modelBuilder.Entity<User>(entity =>

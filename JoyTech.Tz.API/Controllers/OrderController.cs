@@ -15,15 +15,15 @@ public class OrderController : ControllerBase
         _orderLogic = orderLogic;
     }
     
-    [Route("orders/all-orders")]
+    [Route("/all-orders")]
     [HttpGet]
     public IActionResult GetAllOrders()
     {
         return Ok(_orderLogic.GetAllOrders());
     }
     
-    [Route("orders/create-order")]
-    [HttpPost]
+    [Route("/create-order")]
+    [HttpPut]
     public IActionResult CreateOrder(OrderModel model)
     {
         var order = new Order
@@ -38,8 +38,8 @@ public class OrderController : ControllerBase
         return BadRequest(order);
     }
     
-    [Route("orders/update-order")]
-    [HttpPost]
+    [Route("/update-order")]
+    [HttpPut]
     public IActionResult UpdateOrder(int id, OrderModel model)
     {
         var order = _orderLogic.GetOrderById(id);
@@ -61,8 +61,8 @@ public class OrderController : ControllerBase
         return NotFound();
     }
     
-    [Route("orders/delete-order")]
-    [HttpPost]
+    [Route("/delete-order")]
+    [HttpDelete]
     public IActionResult DeleteOrder(int id)
     {
         if (_orderLogic.DeleteOrder(id))
