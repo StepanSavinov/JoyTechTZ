@@ -131,6 +131,14 @@ public class UserController : ControllerBase
     {
         return Ok(_userLogic.GetUserOrders(id));
     }
+
+    [Authorize(Policy = "Admin")]
+    [Route("/info")]
+    [HttpGet]
+    public IActionResult GetUserInfo(int userId)
+    {
+        return Ok(_userLogic.GetUserInfo(userId));
+    }
     
     private static string GetHashedPassword(string password)
     {

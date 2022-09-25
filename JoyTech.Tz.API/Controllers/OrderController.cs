@@ -82,4 +82,24 @@ public class OrderController : ControllerBase
         
         return NotFound();
     }
+
+    [Authorize]
+    [Route("/products")]
+    [HttpGet]
+    public IActionResult GetProductsInOrder(int orderId)
+    {
+        return Ok(_orderLogic.GetProductsInOrder(orderId));
+    }
+
+    [Authorize(Policy = "Admin")]
+    [Route("/products-by-filter")]
+    [HttpGet]
+    public IActionResult GetOrdersByFilter(
+        bool byMaxPrice = false,
+        bool byMinPrice = false,
+        bool fromDate = false,
+        bool byAvailability = false)
+    {
+        return Ok(_orderLogic.GetOrdersByFilter(byMaxPrice, byMinPrice, fromDate, byAvailability));
+    }
 }

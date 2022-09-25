@@ -10,5 +10,9 @@ public interface IOrderLogic
     bool DeleteOrder(int id);
     Order? GetOrderById(int id);
     List<Product> GetProductsInOrder(int orderId);
-    
+    dynamic GetOrdersByFilter(
+        bool byMaxPrice = false,
+        bool byMinPrice = false,
+        bool fromDate = false,
+        bool byAvailability = false);
 }
