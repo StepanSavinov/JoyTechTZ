@@ -142,7 +142,7 @@ public class UserController : ControllerBase
 
     public IActionResult TestGitHubAction()
     {
-        return Ok()
+        return Ok();
     }
     
     private static string GetHashedPassword(string password)
