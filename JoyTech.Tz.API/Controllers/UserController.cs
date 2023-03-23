@@ -139,6 +139,11 @@ public class UserController : ControllerBase
     {
         return Ok(_userLogic.GetUserInfo(userId));
     }
+
+    public IActionResult TestGitHubAction()
+    {
+        return Ok();
+    }
     
     private static string GetHashedPassword(string password)
     {
